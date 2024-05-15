@@ -1,0 +1,64 @@
+version: "3.8"
+services:
+  mysql:
+    restart: always
+    image: mysql:8.3.0
+    container_name: mysql
+    expose:
+      - "3306"
+    networks:
+      - mysql_network
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  status-backend:
+    restart: always
+    container_name: status-backend
+    build:
+      context: ./status-backend
+      dockerfile: Dockerfile
+    command: sh -c "rm -rf node_modules && npm install && npm run dev"
+    ports:
+      - "3001:3001"
+    networks:
+      - web_network
+      - mysql_network
+    depends_on:
+      - mysql
+    image: status-backend
+
+  status-frontend:
+    restart: always
+    container_name: status-frontend
+    build:
+      context: ./status-frontend
+      dockerfile: Dockerfile
+    command: npm start
+    ports:
+      - "3000:3000"
+    networks:
+      - web_network
+
+  nodered:
+    image: nodered/node-red
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./node-red:/data
+      - ./settings.js:/data/settings.js
+    command: npm install --save @alvarobc2412/status@latest
+    expose:
+      - "1880"
+
+networks:
+  mysql_network:
+    driver: bridge
+  web_network:
+    driver: bridge
