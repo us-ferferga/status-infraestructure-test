@@ -75,3 +75,7 @@ networks:
     driver: bridge
   web_network:
     driver: bridge
+
+volumes:
+  nodered:
+    name: node-red-status
