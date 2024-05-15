@@ -16,7 +16,11 @@ Before starting with the installation it is necessary to install the following t
 - Docker-compose: You can find the installation guide for your operating system [here](https://docs.docker.com/compose/install/).
 
 > [!CAUTION]
-> This installation includes a `.env.deploy` file that must be partially filled in by the user.
+> This installation includes a `.env.deploy` file that must be partially filled in by the user. In order to use the application correctly, you must enter this .env:
+>
+> - OpenAI API Key
+> - OpenAI OrgID
+> - Github Client Secret
 
 ### Installation Guide for Windows
 
@@ -35,7 +39,7 @@ Before starting with the installation it is necessary to install the following t
    .\setup.bat
    ```
 
-### Installation Guide for MacOS
+### Installation Guide for MacOS/Linux
 
 1. Open a terminal.
 

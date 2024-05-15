@@ -8,11 +8,18 @@ services:
       - "3306"
     networks:
       - mysql_network
+    env_file:
+      - .env
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    healthcheck:
+      test: ["CMD-SHELL", "sleep 20 && exit 0"]
+      interval: 1s
+      timeout: 22s
+      retries: 5
     ports:
       - "3306:3306"
     volumes:
@@ -31,7 +38,8 @@ services:
       - web_network
       - mysql_network
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     image: status-backend
 
   status-frontend:

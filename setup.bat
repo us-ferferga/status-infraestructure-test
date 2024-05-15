@@ -6,6 +6,8 @@ git clone -b feature/22-Create_initial_chatbot https://github.com/statuscomplian
 
 copy .env.deploy status-backend\.env
 
+copy .env.deploy .env
+
 docker-compose -p status up -d
 
-echo Setup completado. Accede a http://localhost:3000 para ver la aplicación o a http://localhost:3001/docs para acceder a la documentación de la API.
+echo "Configuración completada. Visita http://localhost:3000 para ver la aplicación o http://localhost:3001/docs para acceder a la documentación de la API."
