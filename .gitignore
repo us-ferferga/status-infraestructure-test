@@ -1,5 +1,6 @@
 # Infraestructure folders
 mysql
 node-red
+node-red-status
 status-backend
 status-frontend

@@ -55,15 +55,20 @@ services:
       - web_network
 
   nodered:
-    image: nodered/node-red
+    restart: always
+    container_name: node-red-status
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "1880:1880"
     volumes:
-      - ./node-red:/data
       - ./settings.js:/data/settings.js
-    command: npm install --save @alvarobc2412/status@latest
-    expose:
-      - "1880"
+      - ./node-red-status:/data
+    command: node-red
+    image: node-red
+    networks:
+      - web_network
 
 networks:
   mysql_network:
