@@ -15,6 +15,9 @@ Before starting with the installation it is necessary to install the following t
 
 - Docker-compose: You can find the installation guide for your operating system [here](https://docs.docker.com/compose/install/).
 
+> [!CAUTION]
+> This installation includes a `.env.deploy` file that must be partially filled in by the user.
+
 ### Installation Guide for Windows
 
 1. Open Git Bash or your preferred terminal on Windows.
