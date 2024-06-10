@@ -2,7 +2,7 @@
 
 git clone -b feat/9-Manage_AI_requests https://github.com/statuscompliance/status-backend.git
 
-git clone -b feature/22-Create_initial_chatbot https://github.com/statuscompliance/status-frontend.git
+git clone -b feature/24-Bluejay_integration https://github.com/statuscompliance/status-frontend.git
 
 cp .env.deploy ./status-backend/.env
 
