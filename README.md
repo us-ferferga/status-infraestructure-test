@@ -27,14 +27,19 @@ Before starting with the installation it is necessary to install the following t
 1. Open Git Bash or your preferred terminal on Windows.
 
 2. Clone the GitHub repository with the following command:
+
    ```bash
    git clone https://github.com/statuscompliance/infraestructure
    ```
+
 3. Find the `infraestructure` folder or execute:
+
    ```bash
    cd .\infraestructure\
    ```
+
 4. Run the setup script:
+
    ```bash
    .\setup.bat
    ```
@@ -55,13 +60,8 @@ Before starting with the installation it is necessary to install the following t
    cd infraestructure
    ```
 
-4. Grant execution permissions to the `setup.sh` script:
+4. Run the setup script:
 
-   ```bash
-   chmod +x setup.sh
-   ```
-
-5. Run the setup script:
    ```bash
    ./setup.sh
    ```
