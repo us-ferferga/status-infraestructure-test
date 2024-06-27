@@ -8,6 +8,6 @@ cp .env.deploy ./status-backend/.env
 
 cp .env.deploy .env
 
-docker-compose -p status up -d 
+docker compose -p status up -d 
 
 echo "Setup completado. Accede a http://localhost:3000 para ver la aplicación o a http://localhost:3001/docs para acceder a la documentación de la API."
