@@ -66,8 +66,8 @@ Before starting with the installation it is necessary to install or upgrade the 
 
 4. Navigate to a directory that matches your processor
 
-   > [!INFO]
-   > The following command is an example for MacOS and Linux ARM processors. If you are using a different processor, navigate to the corresponding directory.
+ > [!NOTE]
+ > The following command is an example for MacOS and Linux ARM processors. If you are using a different processor, navigate to the corresponding directory.
 
    ```bash
    cd MacOS-LinuxARM
