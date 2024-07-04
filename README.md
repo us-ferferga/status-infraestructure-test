@@ -9,11 +9,9 @@
 
 ### Installation prerequisites
 
-Before starting with the installation it is necessary to install the following tools:
+Before starting with the installation it is necessary to install or upgrade the following tools:
 
 - Docker: You can find the installation guide for your operating system [here](https://docs.docker.com/get-docker/).
-
-- Docker-compose: You can find the installation guide for your operating system [here](https://docs.docker.com/compose/install/).
 
 > [!CAUTION]
 > This installation includes a `.env.deploy` file that must be partially filled in by the user. In order to use the application correctly, you must enter this .env:
@@ -38,10 +36,16 @@ Before starting with the installation it is necessary to install the following t
    cd .\infraestructure\
    ```
 
-4. Run the setup script:
+4. Navigate to the `Windows` directory:
 
    ```bash
-   .\setup.bat
+   cd .\Windows\
+   ```
+
+5. Run the setup script:
+
+   ```bash
+   .\setup_infrastructure.bat
    ```
 
 ### Installation Guide for MacOS/Linux
@@ -60,8 +64,17 @@ Before starting with the installation it is necessary to install the following t
    cd infraestructure
    ```
 
-4. Run the setup script:
+4. Navigate to a directory that matches your processor
+
+   > [!INFO]
+   > The following command is an example for MacOS and Linux ARM processors. If you are using a different processor, navigate to the corresponding directory.
 
    ```bash
-   ./setup.sh
+   cd MacOS-LinuxARM
+   ```
+
+5. Run the setup script:
+
+   ```bash
+   ./setup_infrastructure.sh
    ```
