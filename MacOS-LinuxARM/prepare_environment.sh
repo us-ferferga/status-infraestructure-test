@@ -16,6 +16,14 @@ else
     exit 1
 fi
 
+## Check if Docker Buildx is installed
+if ! docker buildx version >/dev/null 2>&1; then
+    echo "Docker Buildx is not installed. Installing..."
+    docker buildx install
+else
+    echo "Docker Buildx is already installed."
+fi
+
 ## Clean up previous installations
 directories=("status-backend" "status-frontend" "node-red-status" "mysql" "collector-events")
 
