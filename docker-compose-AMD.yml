@@ -24,9 +24,8 @@ services:
     build:
       context: ./status-frontend
       dockerfile: Dockerfile
-    command: npm start
     ports:
-      - "3000:3000"
+      - "3000:80"
     networks:
       - web_network
   # ================================================
@@ -284,3 +283,5 @@ volumes:
   bluejay-redis-ec-volume: null
   nodered:
     name: node-red-status
+  mysql:
+    name: mysql
