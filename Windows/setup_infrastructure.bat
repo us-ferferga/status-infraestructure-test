@@ -2,15 +2,17 @@
 
 echo.
 echo                            WELCOME TO 
+echo.
+(
 echo   ______   _________     _     _________  _____  _____   ______   
 echo .' ____ \ |  _   _  |   / \   |  _   _  ||_   _||_   _|.' ____ \  
 echo | (___ \_||_/ | | \_|  / _ \  |_/ | | \_|  | |    | |  | (___ \_| 
 echo  _.____`.     | |     / ___ \     | |      | '    ' |   _.____`.  
 echo | \____) |   _| |_  _/ /   \ \_  _| |_      \ \__/ /   | \____) | 
 echo  \______.'  |_____||____| |____||_____|      `.__.'     \______.' 
-echo.                                                                                                    
 echo.
-
+) > NUL
+echo.
 
 REM Define the scripts to be executed
 set prepare_script=prepare_environment.bat
