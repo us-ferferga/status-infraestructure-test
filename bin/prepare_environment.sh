@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -e
 
 ## Compare versions
 version_greater_equal() {
@@ -16,21 +18,13 @@ else
     exit 1
 fi
 
-## Check if Docker Buildx is installed
-if ! docker buildx version >/dev/null 2>&1; then
-    echo "Docker Buildx is not installed. Installing..."
-    docker buildx install
-else
-    echo "Docker Buildx is already installed."
-fi
-
 ## Clean up previous installations
 directories=("status-backend" "status-frontend" "node-red-status" "mysql" "collector-events")
 
 for dir in "${directories[@]}"; do
-    if [ -d "../$dir" ]; then
+    if [ -d "$dir" ]; then
         echo "Deleting $dir..."
-        rm -rf "../$dir"
+        rm -rf "$dir"
     fi
 done
 
@@ -39,26 +33,26 @@ done
 
 echo "_______________________CLONING REPOSITORIES_______________________"
 
-git clone -b feat/9-Manage_AI_requests https://github.com/statuscompliance/status-backend.git ../status-backend
+git clone -b feat/9-Manage_AI_requests https://github.com/statuscompliance/status-backend.git status-backend
 
-git clone -b feature/24-Bluejay_integration https://github.com/statuscompliance/status-frontend.git ../status-frontend
+git clone -b feature/24-Bluejay_integration https://github.com/statuscompliance/status-frontend.git status-frontend
 
-git clone https://github.com/statuscompliance/collector-events.git ../collector-events
+git clone https://github.com/statuscompliance/collector-events.git collector-events
 
-cp ../.env.deploy ../status-backend/.env
+cp .env.deploy status-backend/.env
 
-cp ../.env.deploy ../.env
+cp .env.deploy .env
 
 ## If a folder is not created before doing a bind mount in Docker, the folder will be created with root permissions only.
-mkdir -p ../node-red-status
+mkdir -p node-red-status mysql 
 
 ## If a settings.js file exists, delete it and create a new one from settings_template.js
-if [ -f "../settings.js" ]; then
+if [ -f "settings.js" ]; then
     echo "Deleting settings.js..."
-    rm ../settings.js
+    rm settings.js
 fi
 
-cp ../settings_template.js ../settings.js
+cp settings_template.js settings.js
 
 ## Create a new user and password for Node-RED
 
@@ -69,22 +63,14 @@ echo
 read -p "Enter your email: " email
 echo # newline
 
-## Save username and password as environment variables
-
-echo "$username" > /tmp/user_data
-echo "$password" >> /tmp/user_data
-echo "$email" >> /tmp/user_data
-
-if ! npm list -g bcrypt; then
-    npm install -g bcrypt
-fi
-
-hashed_password=$(node -e "console.log(require('bcrypt').hashSync(process.argv[1], 10));" "$password")
-escaped_hashed_password=$(printf '%s\n' "$hashed_password" | sed -e 's/[\/&]/\\&/g')
+# Hash the password
+docker pull epicsoft/bcrypt
+encrypted_password=$(docker run --rm epicsoft/bcrypt hash "$password" 10 | sed -e 's/[\/&]/\\&/g')
+docker rmi epicsoft/bcrypt
 
 ## Replace the example_user and example_pass strings with the new user and password
 
 sed -i '' -e "s/\"example_user\"/\"$username\"/g" ../settings.js
-sed -i '' -e "s/\"example_pass\"/\"$escaped_hashed_password\"/g" ../settings.js
+sed -i '' -e "s/\"example_pass\"/\"$encrypted_password\"/g" ../settings.js
 
 echo "Node-RED user created successfully."

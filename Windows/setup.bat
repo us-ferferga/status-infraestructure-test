@@ -16,7 +16,7 @@ echo.
 
 REM Define the scripts to be executed
 set prepare_script=prepare_environment.bat
-set start_script=start_containers.bat
+set start_script=start.bat
 set data_script=initial_data.bat
 
 REM Function to execute a script

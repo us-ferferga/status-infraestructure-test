@@ -45,7 +45,7 @@ Before starting with the installation it is necessary to install or upgrade the 
 5. Run the setup script:
 
    ```bash
-   .\setup_infrastructure.bat
+   .\setup.bat
    ```
 
 ### Installation Guide for MacOS/Linux
@@ -64,17 +64,8 @@ Before starting with the installation it is necessary to install or upgrade the 
    cd infraestructure
    ```
 
-4. Navigate to a directory that matches your processor
-
- > [!NOTE]
- > The following command is an example for MacOS and Linux ARM processors. If you are using a different processor, navigate to the corresponding directory.
+4. Run the setup script:
 
    ```bash
-   cd MacOS-LinuxARM
-   ```
-
-5. Run the setup script:
-
-   ```bash
-   ./setup_infrastructure.sh
+   ./setup.sh
    ```
