@@ -1,9 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-username=$(sed -n '1p' /tmp/user_data)
-password=$(sed -n '2p' /tmp/user_data)
-email=$(sed -n '3p' /tmp/user_data)
-
+set -e
 
 echo "_______________________INITIAL DATA_______________________"
 
@@ -25,6 +22,3 @@ curl -X POST http://localhost:3001/api/user/signIn \
 
 token=$(cat /tmp/token)
 echo "Token JWT: $token"
-
-rm /tmp/user_data
-rm /tmp/token
