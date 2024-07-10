@@ -266,7 +266,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
 networks:
   mysql_network:
     driver: bridge

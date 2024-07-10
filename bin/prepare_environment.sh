@@ -21,7 +21,7 @@ fi
 echo ""
 
 ## Clean up previous installations
-directories=("status-backend" "status-frontend" "node-red-status" "mysql" "collector-events" ".env")
+directories=("status-backend" "status-frontend" "node-red-status" "collector-events" ".env")
 
 for dir in "${directories[@]}"; do
     if [ -d "$dir" ]; then
@@ -47,7 +47,7 @@ cp .env.deploy status-backend/.env
 cp .env.deploy .env
 
 ## If a folder is not created before doing a bind mount in Docker, the folder will be created with root permissions only.
-mkdir -p node-red-status mysql 
+mkdir -p node-red-status
 
 ## If a settings.js file exists, delete it and create a new one from settings_template.js
 if [ -f "settings.js" ]; then
