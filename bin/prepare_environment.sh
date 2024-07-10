@@ -70,7 +70,7 @@ docker rmi epicsoft/bcrypt
 
 ## Replace the example_user and example_pass strings with the new user and password
 
-sed -i '' -e "s/\"example_user\"/\"$username\"/g" ../settings.js
-sed -i '' -e "s/\"example_pass\"/\"$encrypted_password\"/g" ../settings.js
+sed -i '' -e "s/\"example_user\"/\"$username\"/g" settings.js
+sed -i '' -e "s/\"example_pass\"/\"$encrypted_password\"/g" settings.js
 
 echo "Node-RED user created successfully."
