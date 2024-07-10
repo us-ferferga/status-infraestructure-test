@@ -1,0 +1,9 @@
+{
+  "name": "Test",
+  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "installDockerComposeSwitch": false
+    }
+  }
+}
