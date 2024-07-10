@@ -12,6 +12,9 @@ services:
     networks:
       - web_network
       - mysql_network
+    healthcheck:
+      test: wget --quiet --tries=1 --spider http://127.0.0.1:3001/api/user || exit 1
+      interval: 5s
     depends_on:
       mysql:
         condition: service_healthy
@@ -260,8 +263,6 @@ services:
     restart: always
     image: mysql:8.3.0
     container_name: mysql
-    expose:
-      - "3306"
     networks:
       - mysql_network
     env_file:
@@ -272,10 +273,9 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
     healthcheck:
-      test: ["CMD-SHELL", "sleep 20 && exit 0"]
-      interval: 1s
-      timeout: 22s
-      retries: 5
+      test: mysqladmin ping -h localhost
+      interval: 5s
+      timeout: 50s
     ports:
       - "3306:3306"
     volumes:
