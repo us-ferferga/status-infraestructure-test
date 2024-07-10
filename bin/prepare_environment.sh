@@ -18,8 +18,10 @@ else
     exit 1
 fi
 
+echo ""
+
 ## Clean up previous installations
-directories=("status-backend" "status-frontend" "node-red-status" "mysql" "collector-events")
+directories=("status-backend" "status-frontend" "node-red-status" "mysql" "collector-events" ".env")
 
 for dir in "${directories[@]}"; do
     if [ -d "$dir" ]; then
@@ -28,6 +30,7 @@ for dir in "${directories[@]}"; do
     fi
 done
 
+echo ""
 
 ## Clone repositories
 
@@ -64,13 +67,22 @@ read -p "Enter your email: " email
 echo # newline
 
 # Hash the password
-docker pull epicsoft/bcrypt
+docker pull epicsoft/bcrypt > /dev/null 2>&1
 encrypted_password=$(docker run --rm epicsoft/bcrypt hash "$password" 10 | sed -e 's/[\/&]/\\&/g')
-docker rmi epicsoft/bcrypt
+docker rmi epicsoft/bcrypt > /dev/null 2>&1
 
 ## Replace the example_user and example_pass strings with the new user and password
+## Due to differences in GNU and Mac implementations, we don't do it in place
 
-sed -i '' -e "s/\"example_user\"/\"$username\"/g" settings.js
-sed -i '' -e "s/\"example_pass\"/\"$encrypted_password\"/g" settings.js
+function setVariables() {
+    local output
+    output=$(sed -e "s/\"example_user\"/\"$username\"/g" settings.js)
+    echo "$output" > settings.js
+    output=$(sed -i -e "s/\"example_pass\"/\"$encrypted_password\"/g" settings.js)
+    echo "$output" > settings.js
+}
+
+setVariables
 
 echo "Node-RED user created successfully."
+echo ""
