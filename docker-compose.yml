@@ -15,7 +15,6 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    image: status-backend
   # ================================================
   status-frontend:
     restart: always
@@ -40,7 +39,6 @@ services:
       - ./settings.js:/data/settings.js
       - ./node-red-status:/data
     command: node-red
-    image: node-red
     networks:
       - web_network
   # ================================================

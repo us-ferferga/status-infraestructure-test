@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-echo "Starting the containers..."
-
 source bin/cross_platform_utils.sh
 
 setupCrossPlatformEnvironment
+compose_file=$(getDockerCompose)
 
-docker compose -f $(getDockerCompose) --env-file ../.env up -d --wait
+echo "Starting the containers on $compose_file..."
+echo ""
+
+docker compose -f $compose_file up -d --wait
