@@ -14,7 +14,7 @@ services:
       - mysql_network
     healthcheck:
       test: wget --quiet --tries=1 --spider http://127.0.0.1:3001/api/user || exit 1
-      interval: 5s
+      retries: 10
     depends_on:
       mysql:
         condition: service_healthy
@@ -261,8 +261,8 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
     healthcheck:
       test: mysqladmin ping -h localhost
-      interval: 5s
-      timeout: 50s
+      start_period: 10s
+      retries: 10
     ports:
       - "3306:3306"
     volumes:
