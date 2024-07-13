@@ -36,14 +36,11 @@ echo ""
 
 echo "_______________________CLONING REPOSITORIES_______________________"
 
-git clone -b feat/9-Manage_AI_requests https://github.com/statuscompliance/status-backend.git status-backend
-
-git clone -b feature/24-Bluejay_integration https://github.com/statuscompliance/status-frontend.git status-frontend
-
-git clone https://github.com/statuscompliance/collector-events.git collector-events
+git clone -b feat/9-Manage_AI_requests https://github.com/statuscompliance/status-backend status-backend
+git clone -b feature/22-Create_initial_chatbot https://github.com/statuscompliance/status-frontend status-frontend
+git clone https://github.com/statuscompliance/collector-events collector-events
 
 cp .env.deploy status-backend/.env
-
 cp .env.deploy .env
 
 ## If a folder is not created before doing a bind mount in Docker, the folder will be created with root permissions only.
@@ -78,7 +75,7 @@ function setVariables() {
     local output
     output=$(sed -e "s/\"example_user\"/\"$username\"/g" settings.js)
     echo "$output" > settings.js
-    output=$(sed -i -e "s/\"example_pass\"/\"$encrypted_password\"/g" settings.js)
+    output=$(sed -e "s/\"example_pass\"/\"$encrypted_password\"/g" settings.js)
     echo "$output" > settings.js
 }
 
